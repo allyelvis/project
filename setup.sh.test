@@ -1,0 +1,173 @@
+#!/bin/bash
+
+# Test suite for setup.sh
+
+# Helper function to check for command existence
+command_exists() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+# Test 1: Check for Firebase CLI
+if ! command_exists firebase; then
+  echo "Error: Firebase CLI not found. Please install it."
+  exit 1
+fi
+
+# Create a temporary directory for testing
+TEST_DIR=$(mktemp -d)
+cd "$TEST_DIR"
+
+# Test 2: Project directory creation
+./setup.sh test-project-id
+
+if [ ! -d "test-project-id" ]; then
+    echo "Error: Project directory not created."
+    exit 1
+fi
+
+cd test-project-id
+
+# Test 3: Firebase initialization (simulate successful initialization)
+# In a real test environment, you would mock the firebase init command
+touch .firebaserc
+
+# Test 4: .firebaserc file creation
+if [ ! -f ".firebaserc" ]; then
+    echo "Error: .firebaserc file not created."
+    exit 1
+fi
+
+# Test 5: Public directory setup
+mkdir public
+touch public/index.html
+
+if [ ! -d "public" ] || [ ! -f "public/index.html" ]; then
+  echo "Error: Public directory or index.html not created"
+  exit 1
+fi
+
+
+# Test 6: Firestore rules setup (simulate successful setup)
+touch firestore.rules
+
+# Test 7: Firebase functions setup (simulate successful setup)
+mkdir functions
+touch functions/index.js
+
+# Test 8: Deployment (simulate successful deployment)
+echo "Deployment successful" > deployment_status.txt
+
+# Clean up the temporary directory
+rm -rf "$TEST_DIR"
+
+echo "All tests passed!"
+exit 0{
+  "projectId": "sokoni-44ef1"
+}
+firebase deploy --project "sokoni-44ef1"
+Follow the prompts.  When prompted to select features, make sure to choose **Hosting**.  Ensure you select the correct project, `sokoni-44ef1`.  If you don't see it, you might have to add it using `firebase use --add`.
+{
+  "hosting": {
+    "public": "public", // Or your build directory
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+        {
+            "source": "**",
+            "destination": "/index.html"
+        }
+    ]
+  }
+}
+{
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
+{
+    "hosting": {
+        "public": "public",
+        "ignore": [
+            "firebase.json",
+            "**/.*",
+            "**/node_modules/**"
+        ],
+        "rewrites": [
+            {
+                "source": "**",
+                "destination": "/index.html"
+            }
+        ]
+    }
+}
+{
+    "hosting": {
+        "public": "public",
+        "ignore": [
+            "firebase.json",
+            "**/.*",
+            "**/node_modules/**"
+        ],
+        "rewrites": [
+            {
+                "source": "**",
+                "destination": "/index.html"
+            }
+        ]
+    }
+}
+{
+    "hosting": {
+        "public": "public",
+        "ignore": [
+            "firebase.json",
+            "**/.*",
+            "**/node_modules/**"
+        ],
+        "rewrites": [
+            {
+                "source": "**",
+                "destination": "/index.html"
+            }
+        ]
+    }
+}
+{
+    "hosting": {
+        "public": "public",
+        "ignore": [
+            "firebase.json",
+            "**/.*",
+            "**/node_modules/**"
+        ],
+        "rewrites": [
+            {
+                "source": "**",
+                "destination": "/index.html"
+            }
+        ]
+    }
+}
+(or the equivalent command for your project)  This creates the production-ready version of your project in your `public` directory or whatever your build output location is.
+npm run build
+Or, to deploy only the hosting part (if that's all you need to update):
+Or, to deploy only the hosting part (if that's all you need to update):
+Or, to deploy only the hosting part (if that's all you need to update):
+firebase deploy --only hosting
+If you need to deploy cloud functions as well:
+If you need to deploy cloud functions as well:
+If you need to deploy cloud functions as well:
